@@ -34,33 +34,33 @@
 | Column | Data Type | Description |
 |:---|:---|:---|
 | `Contract_ID` | Integer | Unique contract identifier |
-| `Operation_Category` | Text | Awarded company |
-| `Record_Type` | Text | Awarded company |
+| `Operation_Category` | Text | Operation / service category |
+| `Record_Type` | Text | Record type |
 | `State` | Text | US state |
 | `Statal_Agency` | Text | Public entity requesting services |
 | `Company` | Text | Awarded company |
 | `Description` | Text | Contract description |
 | `Amount` | Currency | Total contract value |
 | `Start_Date` | Date | Contract start date |
-| `End_Date` | Integer | Contract duration |
-| `Contract_Type` | Text | Awarded company |
+| `End_Date` | Date | Contract end date |
+| `Contract_Type` | Text | Contract clasification |
 
 - `Opportunities`
 
 | Column | Data Type | Description |
 |:---|:---|:---|
-| `Opportunity_ID` | Integer | Opportunity identifier |
-| `Operation_Category` | Text | Awarded company |
-| `Record_Type` | Text | Awarded company |
-| `Opportunitie_Type` | Text | Awarded company |
+| `Opportunity_ID` | Integer | Unique Opportunity identifier |
+| `Operation_Category` | Text | Operation / service category |
+| `Record_Type` | Text | Record type |
+| `Opportunitie_Type` | Text | Opportunitie clasification |
 | `Title` | Text | Contract title |
 | `Description` | Text | Contract description |
 | `AI_summary` | Text | Contract description by AI |
 | `Posted_Date` | Date | Opportunity publication date |
 | `Due_Date` | Date | Bid expiration date |
-| `Statal_Agency` | Text | Active / Expired |
-| `Estimated_Low_Value` | Currency | Estimated contract value |
-| `Estimated_High_Value` | Currency | Estimated contract value |
+| `Statal_Agency` | Text | Contractor |
+| `Estimated_Low_Value` | Currency | Lowest estimated contract value |
+| `Estimated_High_Value` | Currency | Highest estimated contract value |
 | `Country` | Text | Country name |
 | `State` | Text | US state |
 | `City` | Text | US city |
