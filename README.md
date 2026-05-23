@@ -93,7 +93,7 @@
 ### 💻 2nd page: OPPORTUNITIES
 
 <p align="center">
-  <img src="OPPORTUNITIES_page.jpg" width="900">
+  <img src="opportunities_page.jpg" width="900">
 </p>
 
 ### 🗃️ ETL and DAX code
