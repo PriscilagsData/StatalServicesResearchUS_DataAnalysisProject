@@ -85,13 +85,13 @@
   <img src="dashboard_pbix.jpg" width="300">
 </p>
 
-### 💻 1st page: CONTRACTS
+#### 💻 1st page: Contracts
 
 <p align="center">
   <img src="contracts_page.jpg" width="1100">
 </p>
 
-### 💻 2nd page: OPPORTUNITIES
+#### 💻 2nd page: Opportunities
 
 <p align="center">
   <img src="opportunities_page.jpg" width="1100">
