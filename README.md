@@ -91,6 +91,8 @@
   <img src="contracts_page.jpg" width="1100">
 </p>
 
+Its purpose is to quickly and easily visualize the **number of contracts** in the database, considering different **States**, **statal agencies**, and **service providers**, to gain insights into **trends and estimated amounts**, **average tickets**, and to identify **frequently contracted companies**. The analysis covers the period **2018-2025**, based on the available database.
+
 #### 📊 2nd page: Opportunities
 
 <p align="center">
