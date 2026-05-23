@@ -84,10 +84,16 @@
   <img src="dashboard_pbix.jpg" width="600">
 </p>
 
-### 🗄️ 1st page: CONTRACTS
+### 💻 1st page: CONTRACTS
 
 <p align="center">
   <img src="contracts_page.jpg" width="900">
+</p>
+
+### 💻 2nd page: OPPORTUNITIES
+
+<p align="center">
+  <img src="OPPORTUNITIES_page.jpg" width="900">
 </p>
 
 ### 🗃️ ETL and DAX code
