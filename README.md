@@ -104,23 +104,201 @@ This section analyzes **contract opportunities**, primarily considering **State*
 Additionally, **contracting peaks** can be identified through a monthly trend analysis.
 
 
-### 🗃️ ETL and DAX code
+### 🗃️ DAX Measures
 
 <details>
-<summary><b> ✒️ Main DAX measures </b></summary>
-
+<summary><b> ⚡ Main DAX Measures </b></summary>
 <br>
-- 1
-- 2
 
+- Interactive HTML Content visualization with Recurrent companies (with more than 1 contract within 2018-2025)
 
+```DAX
+infoHTML2 = 
+VAR AzulBarrita = "#3b82f6" 
+VAR FondoTarjetaActiva = "rgba(30, 58, 138, 0.4)" 
+VAR FondoIconoCirculo = "rgba(255, 255, 255, 0.1)" 
+VAR FondoListaDetalle = "#141a29" -- Gris muy oscuro (un poco más claro que el #080c17)
+VAR TextoBlanco = "#e0e0e0"
+VAR TextoGris = "#e0e0e0"
+VAR LineaDivisoria = "rgba(255,255,255,0.08)" 
+
+-- 1. Encabezado
+VAR HeaderHTML = 
+    "<div style='font-family: Segoe UI, sans-serif; color: " & TextoBlanco & "; margin-bottom: 10px; padding-left: 5px;'>" &
+        "<div style='font-size: 18px; font-weight: bold;'>Recurrent companies</div>" &
+    "</div>"
+
+-- 2. Generación de la Lista
+VAR CardsList = 
+    CONCATENATEX(
+        FILTER(
+            VALUES(contracts[awardee_raw]), 
+            [Award_Quantity] > 1
+        ),
+        "<details style='margin-bottom: 6px; font-family: Segoe UI, sans-serif; border-radius: 8px; overflow: hidden; background: " & FondoTarjetaActiva & "; position: relative; border: 1px solid rgba(255,255,255,0.05);'>" &
+            
+            -- BARRA FINA (2px)
+            "<div style='position:absolute; left:0; top:0; bottom:0; width:2px; background:" & AzulBarrita & ";'></div>" &
+
+            "<summary style='list-style: none; cursor: pointer; padding: 12px 15px 12px 20px; display: flex; align-items: center; color: " & TextoBlanco & ";'>" &
+                "<div style='background-color: " & FondoIconoCirculo & "; border-radius: 50%; min-width: 38px; height: 38px; margin-right: 15px; display: flex; align-items: center; justify-content: center;'>" &
+                    "<svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 21l-4-4 4-4M17 3l4 4-4 4M3 17h18M21 7H3'/></svg>" &
+                "</div>" &
+                "<div style='flex-grow: 1;'>" &
+                    "<div style='font-size: 16px; font-weight: 700; text-transform: uppercase;'>" & contracts[awardee_raw] & "</div>" &
+                    "<div style='font-size: 13px; color: " & TextoGris & ";'>" & [Award_Quantity] & " contracts - Total: " & FORMAT([SumAmount], "$ #,0") & "</div>" &
+                "</div>" &
+                "<div style='font-size: 15px; font-weight: bold; opacity: 0.8;'>" & [Award_Quantity] & "x ▼</div>" &
+            "</summary>" &
+
+            -- LISTA DE CONTRATOS (Fondo aclarado a gris azulado oscuro)
+            "<div style='background-color: " & FondoListaDetalle & "; padding: 0 5px;'>" &
+                CONCATENATEX(
+                    CALCULATETABLE(contracts),
+                    VAR DescText = contracts[description]
+                    VAR Duration = [AwardPeriod_days]
+                    VAR StateBadge = contracts[state_abr]
+                    
+                    VAR DescHTML = IF(DescText = "Nan" || ISBLANK(DescText), "", "<div style='font-size: 14px; color: " & TextoBlanco & "; font-weight: 500; margin: 5px 0;'>" & DescText & "</div>")
+                    
+                    RETURN
+                    "<div style='padding: 14px 18px; border-bottom: 1px solid " & LineaDivisoria & "; display: flex; justify-content: space-between; align-items: center;'>" &
+                        "<div style='flex-grow: 1;'>" &
+                            "<div style='display: flex; align-items: center; gap: 10px;'>" &
+                                "<span style='font-size: 11px; padding: 2px 6px; border-radius: 4px; background: #ffffff; color: #000; font-weight: 800;'>" & StateBadge & "</span>" &
+                                "<span style='font-size: 14px; color: " & TextoGris & "; font-weight: 600;'>" & contracts[agency_raw] & "</span>" &
+                            "</div>" &
+                            
+                            DescHTML &
+                            
+                            "<div style='font-size: 13px; color: " & TextoGris & "; margin-top: 3px;'>" &
+                                "Start: " & FORMAT(contracts[start_date], "dd MMM yyyy") & 
+                                IF(NOT ISBLANK(contracts[end_date]), "  •  Fin: " & FORMAT(contracts[end_date], "dd MMM yyyy"), "") &
+                                IF(NOT ISBLANK(Duration), "  •  <span style='color:" & AzulBarrita & "; font-weight: bold;'>" & Duration & " days</span>", "") &
+                            "</div>" &
+                        "</div>" &
+                        
+                        "<div style='font-size: 17px; font-weight: bold; color: " & TextoBlanco & ";'>$" & FORMAT(contracts[award_amount], "#,0") & "</div>" &
+                    "</div>",
+                    "",
+                    contracts[start_date], DESC
+                ) &
+            "</div>" &
+        "</details>",
+        "", 
+        [Award_Quantity], DESC
+    )
+
+RETURN
+    "<div style='padding: 2px;'>" & HeaderHTML & CardsList & "</div>"
+```
+
+- Interactive HTML Content visualization with the opportunities status and details
+
+```DAX
+OppTableHTML = 
+VAR TextoGrisCasiBlanco = "#e0e0e0" 
+VAR TextoGrisAzulado = "#8e9aaf" 
+VAR AzulElectrico = "#3b82f6" 
+VAR BordeCard = "rgba(255, 255, 255, 0.20)" 
+VAR FondoHeader = "#0b0e14"
+VAR FondoDetalle = "#141822"
+
+-- 1. Header con proporciones ajustadas
+VAR Header = 
+"<div style='font-family: Segoe UI, sans-serif; display: flex; background-color: " & FondoHeader & "; padding: 15px 10px; border-bottom: 2px solid " & AzulElectrico & "; font-size: 14px; font-weight: 800; color: " & AzulElectrico & "; text-transform: uppercase;'>
+    <div style='flex: 4;'>Title</div>
+    <div style='flex: 3;'>Agency</div>
+    <div style='flex: 1.5;'>Due Date</div>
+    <div style='flex: 1; text-align: center;'>Status</div>
+    <div style='width: 35px;'></div>
+</div>"
+
+-- 2. Body con Accordion
+VAR TableRows = 
+CONCATENATEX(
+    TOPN(1000, opportunities, [Due_Date], DESC),
+    
+    VAR DaysDiff = DATEDIFF(TODAY(), [Due_Date], DAY)
+    VAR StatusText = IF(DaysDiff < 0, "EXPIRED", "ACTIVE")
+    VAR StatusColor = IF(DaysDiff < 0, "#ef4444", "#22c55e")
+    
+    RETURN
+    "<details style='font-family: Segoe UI, sans-serif; border-bottom: 1px solid " & BordeCard & "; background-color: #0b0e14;'>
+        
+        <summary style='list-style: none; cursor: pointer; padding: 12px 10px; display: flex; align-items: center;'>
+            
+            <!-- TITLE (Flex 4) -->
+            <div style='flex: 4; padding-right: 20px;'>
+                <div style='font-weight: 700; font-size: 13px; color: white;'>" & SUBSTITUTE([Title], [City], "") & "</div>
+            </div>
+
+            <!-- AGENCY (Flex 3) -->
+            <div style='flex: 3; padding-right: 15px;'>
+                <div style='font-size: 13px; font-weight: 600; color: white;'>" & COALESCE(opportunities[Statal_Agency], "---") & "</div>
+                <div style='font-size: 14px; color: " & TextoGrisAzulado & ";'>" & 
+                    COALESCE([City], "---") & ", " & COALESCE([State], "---") & 
+                "</div>
+            </div>
+
+            <!-- DUE DATE (Flex 1.5) -->
+            <div style='flex: 1.5;'>
+                <div style='font-size: 13px; font-weight: 600; color: white;'>" & FORMAT([Due_Date], "MMM dd, yyyy") & "</div>
+                <div style='font-size: 13px; color: " & TextoGrisAzulado & ";'>" & 
+                    IF(DaysDiff < 0, "Expired " & ABS(DaysDiff) & " d. ago", DaysDiff & " d. left") & 
+                "</div>
+            </div>
+
+            <!-- STATUS (Flex 1) -->
+            <div style='flex: 1; text-align: center;'>
+                <span style='background: " & StatusColor & "; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: bold;'>" & StatusText & "</span>
+            </div>
+
+            <div style='width: 35px; text-align: right; color: " & TextoGrisAzulado & "; font-size: 12px;'>▼</div>
+        </summary>
+
+        <!-- DETALLE INTERNO (Sin cambios en proporciones para lectura vertical) -->
+        <div style='padding: 20px; background-color: " & FondoDetalle & "; border-top: 1px dashed " & BordeCard & ";'>
+            <div style='display: flex; justify-content: space-between; margin-bottom: 20px;'>
+                <div style='flex: 1;'>
+                    <div style='color: " & TextoGrisAzulado & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Posting Date</div>
+                    <div style='color: white; font-size: 14px; font-weight: 700; margin-top: 5px;'>" & FORMAT(opportunities[Posted_Date], "MMMM d, yyyy") & "</div>
+                </div>
+                <div style='flex: 1;'>
+                    <div style='color: " & TextoGrisAzulado & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Due Date</div>
+                    <div style='color: white; font-size: 14px; font-weight: 700; margin-top: 5px;'>" & FORMAT([Due_Date], "MMMM d, yyyy") & "</div>
+                </div>
+                <div style='flex: 1;'>
+                    <div style='color: " & TextoGrisAzulado & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Estimated Value</div>
+                    <div style='color: white; font-size: 16px; font-weight: 800; margin-top: 5px;'>" & FORMAT([val_avg_low], "$ #,0") & " - " & FORMAT([val_avg_high], "$ #,0") & "</div>
+                </div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <div style='color: white; font-size: 14px; font-weight: 700; margin-bottom: 5px;'>Description</div>
+                <div style='color: " & TextoGrisCasiBlanco & "; font-size: 12px; line-height: 1.5;'>" & COALESCE([Description], "No description available.") & "</div>
+            </div>
+            <div style='background: rgba(59, 130, 246, 0.1); padding: 15px; border-left: 4px solid " & AzulElectrico & "; border-radius: 4px;'>
+                <div style='color: " & AzulElectrico & "; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px;'>AI Summary</div>
+                <div style='color: " & TextoGrisCasiBlanco & "; font-size: 12px; line-height: 1.4; font-style: italic;'>" & 
+                    COALESCE([AI_summary], "No AI summary available.") & 
+                "</div>
+            </div>
+        </div>
+    </details>",
+    "",
+    [Due_Date], DESC
+)
+
+RETURN
+"<div style='background-color: #080c17; border-radius: 8px; overflow: hidden;'>" & Header & TableRows & "</div>"
+```
 </details>
 
 ## 📨 Contact and info
 
 * You are welcome to:
 
-**Request services**, compose a friendly **e-mail**, **send requests** and **suggestions** to: <sidolipriscilag@gmail.com>
+**Request services**, compose a friendly **e-mail**, **send requests about ETL** and **suggestions** to: <sidolipriscilag@gmail.com>
   
 Priscila Gutierrez Sídoli - Linkdn  <a href="https://www.linkedin.com/in/priscilagsidoliiq/" target="_blank">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="15"/>
