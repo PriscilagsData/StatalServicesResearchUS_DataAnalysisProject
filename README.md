@@ -114,74 +114,74 @@ Additionally, **contracting peaks** can be identified through a monthly trend an
 
 ```DAX
 infoHTML2 = 
-VAR AzulBarrita = "#3b82f6" 
-VAR FondoTarjetaActiva = "rgba(30, 58, 138, 0.4)" 
-VAR FondoIconoCirculo = "rgba(255, 255, 255, 0.1)" 
-VAR FondoListaDetalle = "#141a29" -- Gris muy oscuro (un poco más claro que el #080c17)
-VAR TextoBlanco = "#e0e0e0"
-VAR TextoGris = "#e0e0e0"
-VAR LineaDivisoria = "rgba(255,255,255,0.08)" 
+VAR BlueBar = "#3b82f6" 
+VAR BackgActiveCard = "rgba(30, 58, 138, 0.4)" 
+VAR BackgIconCircle = "rgba(255, 255, 255, 0.1)" 
+VAR BackgListDetail = "#141a29"
+VAR WhiteText = "#e0e0e0"
+VAR GreyText = "#e0e0e0"
+VAR DividerLine = "rgba(255,255,255,0.08)" 
 
--- 1. Encabezado
+-- 1. Header
 VAR HeaderHTML = 
-    "<div style='font-family: Segoe UI, sans-serif; color: " & TextoBlanco & "; margin-bottom: 10px; padding-left: 5px;'>" &
+    "<div style='font-family: Segoe UI, sans-serif; color: " & WhiteText & "; margin-bottom: 10px; padding-left: 5px;'>" &
         "<div style='font-size: 18px; font-weight: bold;'>Recurrent companies</div>" &
     "</div>"
 
--- 2. Generación de la Lista
+-- 2. List
 VAR CardsList = 
     CONCATENATEX(
         FILTER(
-            VALUES(contracts[awardee_raw]), 
+            VALUES(contracts[Company]), 
             [Award_Quantity] > 1
         ),
-        "<details style='margin-bottom: 6px; font-family: Segoe UI, sans-serif; border-radius: 8px; overflow: hidden; background: " & FondoTarjetaActiva & "; position: relative; border: 1px solid rgba(255,255,255,0.05);'>" &
+        "<details style='margin-bottom: 6px; font-family: Segoe UI, sans-serif; border-radius: 8px; overflow: hidden; background: " & BackgActiveCard & "; position: relative; border: 1px solid rgba(255,255,255,0.05);'>" &
             
-            -- BARRA FINA (2px)
-            "<div style='position:absolute; left:0; top:0; bottom:0; width:2px; background:" & AzulBarrita & ";'></div>" &
+            -- BAR (2px)
+            "<div style='position:absolute; left:0; top:0; bottom:0; width:2px; background:" & BlueBar & ";'></div>" &
 
-            "<summary style='list-style: none; cursor: pointer; padding: 12px 15px 12px 20px; display: flex; align-items: center; color: " & TextoBlanco & ";'>" &
-                "<div style='background-color: " & FondoIconoCirculo & "; border-radius: 50%; min-width: 38px; height: 38px; margin-right: 15px; display: flex; align-items: center; justify-content: center;'>" &
+            "<summary style='list-style: none; cursor: pointer; padding: 12px 15px 12px 20px; display: flex; align-items: center; color: " & WhiteText & ";'>" &
+                "<div style='background-color: " & BackgIconCircle & "; border-radius: 50%; min-width: 38px; height: 38px; margin-right: 15px; display: flex; align-items: center; justify-content: center;'>" &
                     "<svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 21l-4-4 4-4M17 3l4 4-4 4M3 17h18M21 7H3'/></svg>" &
                 "</div>" &
                 "<div style='flex-grow: 1;'>" &
-                    "<div style='font-size: 16px; font-weight: 700; text-transform: uppercase;'>" & contracts[awardee_raw] & "</div>" &
-                    "<div style='font-size: 13px; color: " & TextoGris & ";'>" & [Award_Quantity] & " contracts - Total: " & FORMAT([SumAmount], "$ #,0") & "</div>" &
+                    "<div style='font-size: 16px; font-weight: 700; text-transform: uppercase;'>" & contracts[Company] & "</div>" &
+                    "<div style='font-size: 13px; color: " & GreyText & ";'>" & [Award_Quantity] & " contracts - Total: " & FORMAT([SumAmount], "$ #,0") & "</div>" &
                 "</div>" &
                 "<div style='font-size: 15px; font-weight: bold; opacity: 0.8;'>" & [Award_Quantity] & "x ▼</div>" &
             "</summary>" &
 
-            -- LISTA DE CONTRATOS (Fondo aclarado a gris azulado oscuro)
-            "<div style='background-color: " & FondoListaDetalle & "; padding: 0 5px;'>" &
+            -- CONTRACT LIST
+            "<div style='background-color: " & BackgListDetail & "; padding: 0 5px;'>" &
                 CONCATENATEX(
                     CALCULATETABLE(contracts),
-                    VAR DescText = contracts[description]
+                    VAR DescText = contracts[Description]
                     VAR Duration = [AwardPeriod_days]
-                    VAR StateBadge = contracts[state_abr]
+                    VAR StateBadge = contracts[State]
                     
-                    VAR DescHTML = IF(DescText = "Nan" || ISBLANK(DescText), "", "<div style='font-size: 14px; color: " & TextoBlanco & "; font-weight: 500; margin: 5px 0;'>" & DescText & "</div>")
+                    VAR DescHTML = IF(DescText = "Nan" || ISBLANK(DescText), "", "<div style='font-size: 14px; color: " & WhiteText & "; font-weight: 500; margin: 5px 0;'>" & DescText & "</div>")
                     
                     RETURN
-                    "<div style='padding: 14px 18px; border-bottom: 1px solid " & LineaDivisoria & "; display: flex; justify-content: space-between; align-items: center;'>" &
+                    "<div style='padding: 14px 18px; border-bottom: 1px solid " & DividerLine & "; display: flex; justify-content: space-between; align-items: center;'>" &
                         "<div style='flex-grow: 1;'>" &
                             "<div style='display: flex; align-items: center; gap: 10px;'>" &
                                 "<span style='font-size: 11px; padding: 2px 6px; border-radius: 4px; background: #ffffff; color: #000; font-weight: 800;'>" & StateBadge & "</span>" &
-                                "<span style='font-size: 14px; color: " & TextoGris & "; font-weight: 600;'>" & contracts[agency_raw] & "</span>" &
+                                "<span style='font-size: 14px; color: " & GreyText & "; font-weight: 600;'>" & contracts[Company] & "</span>" &
                             "</div>" &
                             
                             DescHTML &
                             
-                            "<div style='font-size: 13px; color: " & TextoGris & "; margin-top: 3px;'>" &
-                                "Start: " & FORMAT(contracts[start_date], "dd MMM yyyy") & 
-                                IF(NOT ISBLANK(contracts[end_date]), "  •  Fin: " & FORMAT(contracts[end_date], "dd MMM yyyy"), "") &
-                                IF(NOT ISBLANK(Duration), "  •  <span style='color:" & AzulBarrita & "; font-weight: bold;'>" & Duration & " days</span>", "") &
+                            "<div style='font-size: 13px; color: " & GreyText & "; margin-top: 3px;'>" &
+                                "Start: " & FORMAT(contracts[Start_date], "dd MMM yyyy") & 
+                                IF(NOT ISBLANK(contracts[End_date]), "  •  Fin: " & FORMAT(contracts[End_date], "dd MMM yyyy"), "") &
+                                IF(NOT ISBLANK(Duration), "  •  <span style='color:" & BlueBar & "; font-weight: bold;'>" & Duration & " days</span>", "") &
                             "</div>" &
                         "</div>" &
                         
-                        "<div style='font-size: 17px; font-weight: bold; color: " & TextoBlanco & ";'>$" & FORMAT(contracts[award_amount], "#,0") & "</div>" &
+                        "<div style='font-size: 17px; font-weight: bold; color: " & WhiteText & ";'>$" & FORMAT(contracts[Amount], "#,0") & "</div>" &
                     "</div>",
                     "",
-                    contracts[start_date], DESC
+                    contracts[Start_date], DESC
                 ) &
             "</div>" &
         "</details>",
