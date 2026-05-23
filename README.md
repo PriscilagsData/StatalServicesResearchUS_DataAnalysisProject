@@ -9,7 +9,8 @@
 <img src="https://www.vectorlogo.zone/logos/snowflake/snowflake-icon.svg" width="40"/>
 <img src="https://img.icons8.com/color/48/html-5--v1.png" width="40"/>
 </p>
-<sub> Power BI • Excel • CSV • Snowflake • HTML visuals </sub>
+
+**Power BI • CSV • Excel • Snowflake • HTML visuals**
 
 #### 📌 Executive Summary
 
@@ -83,6 +84,11 @@
   <img src="dashboard_pbix.jpg" width="600">
 </p>
 
+### 🗄️ 1st page: CONTRACTS
+
+<p align="center">
+  <img src="contracts_page.jpg" width="900">
+</p>
 
 ### 🗃️ ETL and DAX code
 
