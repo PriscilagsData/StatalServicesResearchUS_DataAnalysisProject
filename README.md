@@ -110,7 +110,7 @@ Additionally, **contracting peaks** can be identified through a monthly trend an
 <summary><b> ⚡ Main DAX Measures </b></summary>
 <br>
 
-- Interactive HTML Content visualization with Recurrent companies (with more than 1 contract within 2018-2025)
+- **Interactive HTML Content visualization with Recurrent companies (with more than 1 contract within 2018-2025)**
 
 ```DAX
 infoHTML2 = 
@@ -172,8 +172,8 @@ VAR CardsList =
                             DescHTML &
                             
                             "<div style='font-size: 13px; color: " & GreyText & "; margin-top: 3px;'>" &
-                                "Start: " & FORMAT(contracts[Start_date], "dd MMM yyyy") & 
-                                IF(NOT ISBLANK(contracts[End_date]), "  •  Fin: " & FORMAT(contracts[End_date], "dd MMM yyyy"), "") &
+                                "Start: " & FORMAT(contracts[Start_Date], "dd MMM yyyy") & 
+                                IF(NOT ISBLANK(contracts[End_Date]), "  •  Fin: " & FORMAT(contracts[End_Date], "dd MMM yyyy"), "") &
                                 IF(NOT ISBLANK(Duration), "  •  <span style='color:" & BlueBar & "; font-weight: bold;'>" & Duration & " days</span>", "") &
                             "</div>" &
                         "</div>" &
@@ -181,7 +181,7 @@ VAR CardsList =
                         "<div style='font-size: 17px; font-weight: bold; color: " & WhiteText & ";'>$" & FORMAT(contracts[Amount], "#,0") & "</div>" &
                     "</div>",
                     "",
-                    contracts[Start_date], DESC
+                    contracts[Start_Date], DESC
                 ) &
             "</div>" &
         "</details>",
@@ -193,20 +193,20 @@ RETURN
     "<div style='padding: 2px;'>" & HeaderHTML & CardsList & "</div>"
 ```
 
-- Interactive HTML Content visualization with the opportunities status and details
+- **Interactive HTML Content visualization with the opportunities status and details**
 
 ```DAX
 OppTableHTML = 
-VAR TextoGrisCasiBlanco = "#e0e0e0" 
-VAR TextoGrisAzulado = "#8e9aaf" 
-VAR AzulElectrico = "#3b82f6" 
-VAR BordeCard = "rgba(255, 255, 255, 0.20)" 
-VAR FondoHeader = "#0b0e14"
-VAR FondoDetalle = "#141822"
+VAR TextLightGrey = "#e0e0e0" 
+VAR TextGreyBlue = "#8e9aaf" 
+VAR ElectricBlue = "#3b82f6" 
+VAR BorderCard = "rgba(255, 255, 255, 0.20)" 
+VAR BackgHeader = "#0b0e14"
+VAR BackgDetail = "#141822"
 
--- 1. Header con proporciones ajustadas
+-- 1. Header
 VAR Header = 
-"<div style='font-family: Segoe UI, sans-serif; display: flex; background-color: " & FondoHeader & "; padding: 15px 10px; border-bottom: 2px solid " & AzulElectrico & "; font-size: 14px; font-weight: 800; color: " & AzulElectrico & "; text-transform: uppercase;'>
+"<div style='font-family: Segoe UI, sans-serif; display: flex; background-color: " & BackgHeader & "; padding: 15px 10px; border-bottom: 2px solid " & ElectricBlue & "; font-size: 14px; font-weight: 800; color: " & ElectricBlue & "; text-transform: uppercase;'>
     <div style='flex: 4;'>Title</div>
     <div style='flex: 3;'>Agency</div>
     <div style='flex: 1.5;'>Due Date</div>
@@ -214,7 +214,7 @@ VAR Header =
     <div style='width: 35px;'></div>
 </div>"
 
--- 2. Body con Accordion
+-- 2. Accordion
 VAR TableRows = 
 CONCATENATEX(
     TOPN(1000, opportunities, [Due_Date], DESC),
@@ -224,7 +224,7 @@ CONCATENATEX(
     VAR StatusColor = IF(DaysDiff < 0, "#ef4444", "#22c55e")
     
     RETURN
-    "<details style='font-family: Segoe UI, sans-serif; border-bottom: 1px solid " & BordeCard & "; background-color: #0b0e14;'>
+    "<details style='font-family: Segoe UI, sans-serif; border-bottom: 1px solid " & BorderCard & "; background-color: #0b0e14;'>
         
         <summary style='list-style: none; cursor: pointer; padding: 12px 10px; display: flex; align-items: center;'>
             
@@ -236,7 +236,7 @@ CONCATENATEX(
             <!-- AGENCY (Flex 3) -->
             <div style='flex: 3; padding-right: 15px;'>
                 <div style='font-size: 13px; font-weight: 600; color: white;'>" & COALESCE(opportunities[Statal_Agency], "---") & "</div>
-                <div style='font-size: 14px; color: " & TextoGrisAzulado & ";'>" & 
+                <div style='font-size: 14px; color: " & TextGreyBlue & ";'>" & 
                     COALESCE([City], "---") & ", " & COALESCE([State], "---") & 
                 "</div>
             </div>
@@ -244,7 +244,7 @@ CONCATENATEX(
             <!-- DUE DATE (Flex 1.5) -->
             <div style='flex: 1.5;'>
                 <div style='font-size: 13px; font-weight: 600; color: white;'>" & FORMAT([Due_Date], "MMM dd, yyyy") & "</div>
-                <div style='font-size: 13px; color: " & TextoGrisAzulado & ";'>" & 
+                <div style='font-size: 13px; color: " & TextGreyBlue & ";'>" & 
                     IF(DaysDiff < 0, "Expired " & ABS(DaysDiff) & " d. ago", DaysDiff & " d. left") & 
                 "</div>
             </div>
@@ -254,32 +254,32 @@ CONCATENATEX(
                 <span style='background: " & StatusColor & "; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: bold;'>" & StatusText & "</span>
             </div>
 
-            <div style='width: 35px; text-align: right; color: " & TextoGrisAzulado & "; font-size: 12px;'>▼</div>
+            <div style='width: 35px; text-align: right; color: " & TextGreyBlue & "; font-size: 12px;'>▼</div>
         </summary>
 
-        <!-- DETALLE INTERNO (Sin cambios en proporciones para lectura vertical) -->
-        <div style='padding: 20px; background-color: " & FondoDetalle & "; border-top: 1px dashed " & BordeCard & ";'>
+        <!-- INTERN DETAIL
+        <div style='padding: 20px; background-color: " & BackgDetail & "; border-top: 1px dashed " & BorderCard & ";'>
             <div style='display: flex; justify-content: space-between; margin-bottom: 20px;'>
                 <div style='flex: 1;'>
-                    <div style='color: " & TextoGrisAzulado & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Posting Date</div>
+                    <div style='color: " & TextGreyBlue & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Posting Date</div>
                     <div style='color: white; font-size: 14px; font-weight: 700; margin-top: 5px;'>" & FORMAT(opportunities[Posted_Date], "MMMM d, yyyy") & "</div>
                 </div>
                 <div style='flex: 1;'>
-                    <div style='color: " & TextoGrisAzulado & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Due Date</div>
+                    <div style='color: " & TextGreyBlue & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Due Date</div>
                     <div style='color: white; font-size: 14px; font-weight: 700; margin-top: 5px;'>" & FORMAT([Due_Date], "MMMM d, yyyy") & "</div>
                 </div>
                 <div style='flex: 1;'>
-                    <div style='color: " & TextoGrisAzulado & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Estimated Value</div>
+                    <div style='color: " & TextGreyBlue & "; font-size: 11px; text-transform: uppercase; font-weight: 600;'>Estimated Value</div>
                     <div style='color: white; font-size: 16px; font-weight: 800; margin-top: 5px;'>" & FORMAT([val_avg_low], "$ #,0") & " - " & FORMAT([val_avg_high], "$ #,0") & "</div>
                 </div>
             </div>
             <div style='margin-bottom: 20px;'>
                 <div style='color: white; font-size: 14px; font-weight: 700; margin-bottom: 5px;'>Description</div>
-                <div style='color: " & TextoGrisCasiBlanco & "; font-size: 12px; line-height: 1.5;'>" & COALESCE([Description], "No description available.") & "</div>
+                <div style='color: " & TextLightGrey & "; font-size: 12px; line-height: 1.5;'>" & COALESCE([Description], "No description available.") & "</div>
             </div>
             <div style='background: rgba(59, 130, 246, 0.1); padding: 15px; border-left: 4px solid " & AzulElectrico & "; border-radius: 4px;'>
-                <div style='color: " & AzulElectrico & "; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px;'>AI Summary</div>
-                <div style='color: " & TextoGrisCasiBlanco & "; font-size: 12px; line-height: 1.4; font-style: italic;'>" & 
+                <div style='color: " & ElectricBlue & "; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px;'>AI Summary</div>
+                <div style='color: " & TextLightGrey & "; font-size: 12px; line-height: 1.4; font-style: italic;'>" & 
                     COALESCE([AI_summary], "No AI summary available.") & 
                 "</div>
             </div>
