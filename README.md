@@ -109,7 +109,7 @@
 
 </details>
 
-## 🗃️ Contact and info
+## 📨 Contact and info
 
 * You are welcome to:
 
