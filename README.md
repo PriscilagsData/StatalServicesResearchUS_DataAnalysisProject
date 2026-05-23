@@ -1,4 +1,4 @@
-## 📄 State Services Market Research (US)
+# 📄 State Services Market Research (US)
 ### Contract Bidding & Opportunity Intelligence Dashboard
 
 <p align="left">
@@ -13,21 +13,21 @@
 
 #### 📌 Executive Summary
 
-<sub>  - Analyzed historical US public service contracts and bidding opportunities</sub>
-
-<sub>  - Identified recurring vendors, agency demand patterns, and contract trends</sub>
-
-<sub>  - Built KPI-driven dashboards for opportunity tracking and urgency analysis</sub>
-
-<sub>  - Developed custom HTML visuals and interactive Power BI reporting</sub>
+- Analyzed historical US public service contracts and bidding opportunities
+- Identified recurring vendors, agency demand patterns, and contract trends
+- Built KPI-driven dashboards for opportunity tracking and urgency analysis
+- Developed custom HTML visuals and interactive Power BI reporting
 
 **Some data was modified for reasons of corporate confidentiality.**
 
----
+## 🗃️ Relational model and BI report
 
-### 🗃️ Data ETL and BI report
+### 🗄️ Data Model
 
-#### 🗄️ Data Model
+<details>
+<summary><b> 📑 Table details </b></summary>
+
+<br>
 
 - `Contracts`
 
@@ -66,14 +66,34 @@
 | `City` | Text | US city |
 | `Zip` | Text | City zip code |
 
+</details>
 
-#### 🗄️ Power BI report
+---
+
+- `Relational model pbix after ETL and DAX measures`
+  
+<p align="center">
+  <img src="relational_model_pbix.png" width="400">
+</p>
+
+## 📊 Power BI report
+
 
 <p align="center">
-  <img src="dashboard_pbix.jpg" width="700">
+  <img src="dashboard_pbix.jpg" width="600">
 </p>
 
 
+### 🗃️ ETL and DAX code
+
+<details>
+<summary><b> ✒️ Main DAX measures </b></summary>
+
+<br>
+- 1
+- 2
+
+</details>
 
 
 
