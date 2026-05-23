@@ -87,7 +87,7 @@
 ### 🗄️ 1st page: CONTRACTS
 
 <p align="center">
-  <img src="contracts_page.jpg" width="900">
+  <img src="contracts_page.jpg" width="800">
 </p>
 
 ### 🗃️ ETL and DAX code
