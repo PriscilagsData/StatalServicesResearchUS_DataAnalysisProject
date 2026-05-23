@@ -99,6 +99,12 @@ Its purpose is to quickly and easily visualize the **number of contracts** in th
   <img src="opportunities_page.jpg" width="1100">
 </p>
 
+This section analyzes **contract opportunities**, primarily considering **State**, **government agency**, and **expiration dates**. It displays the **updated status of each contract**: expired, active, and urgent (expiring within the next 7 days). Each opportunity includes a **contract description** and an **AI-generated summary**.
+Additionally, **contracting peaks** can be identified through a monthly trend analysis.
+
+📄 **Download the dashboard (PDF):**  
+[Download Power BI (PDF)](https://github.com/No-Country-simulation/S02-26-Equipo-63-BI/blob/main/informes_proyecto_pdf/Business%20Intelligence%20para%20rob%C3%B3tica%20quir%C3%BArgica%20Justina%20-%20E63.pdf)
+
 ### 🗃️ ETL and DAX code
 
 <details>
