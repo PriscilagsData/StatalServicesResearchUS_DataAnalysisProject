@@ -78,20 +78,20 @@
   <img src="relational_model_pbix.png" width="400">
 </p>
 
-## 📊 Power BI report
+## 💻 Power BI report
 
 
 <p align="center">
   <img src="dashboard_pbix.jpg" width="300">
 </p>
 
-#### 💻 1st page: Contracts
+#### 📊 1st page: Contracts
 
 <p align="center">
   <img src="contracts_page.jpg" width="1100">
 </p>
 
-#### 💻 2nd page: Opportunities
+#### 📊 2nd page: Opportunities
 
 <p align="center">
   <img src="opportunities_page.jpg" width="1100">
