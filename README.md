@@ -46,6 +46,7 @@
 | `End_Date` | Date | Contract end date |
 | `Contract_Type` | Text | Contract clasification |
 
+
 - `Opportunities`
 
 | Column | Data Type | Description |
@@ -81,19 +82,19 @@
 
 
 <p align="center">
-  <img src="dashboard_pbix.jpg" width="600">
+  <img src="dashboard_pbix.jpg" width="300">
 </p>
 
 ### 💻 1st page: CONTRACTS
 
 <p align="center">
-  <img src="contracts_page.jpg" width="900">
+  <img src="contracts_page.jpg" width="1100">
 </p>
 
 ### 💻 2nd page: OPPORTUNITIES
 
 <p align="center">
-  <img src="opportunities_page.jpg" width="900">
+  <img src="opportunities_page.jpg" width="1100">
 </p>
 
 ### 🗃️ ETL and DAX code
@@ -105,9 +106,18 @@
 - 1
 - 2
 
+
 </details>
 
+## 🗃️ Contact and info
 
+* You are welcome to:
 
+**Request services**, compose a friendly **e-mail**, **send requests** and **suggestions** to: <sidolipriscilag@gmail.com>
+  
+Priscila Gutierrez Sídoli - Linkdn  <a href="https://www.linkedin.com/in/priscilagsidoliiq/" target="_blank">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="15"/>
+  </a>
 
+> **If you found this project interesting, please consider giving the repository a ⭐ to support the work.**
 
