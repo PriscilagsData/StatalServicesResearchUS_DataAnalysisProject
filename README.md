@@ -1,5 +1,5 @@
 # 📄 State Services Market Research (US)
-### Contract Bidding & Opportunity Intelligence Dashboard - Data Analysis
+### Data Analysis - Contract Bidding & Opportunity Intelligence Dashboard
 
 <p align="left">
 
