@@ -82,17 +82,18 @@
 
 📄 **[View full Power BI (PDF)](https://github.com/PriscilagsData/StatalServicesResearchUS_DataAnalysisProject/blob/main/public_services_PowerBI.pdf)**
 
-<p align="center">
+<!--<p align="center">
   <img src="dashboard_pbix.jpg" width="300">
 </p>
-
+-->
 #### 📊 `Contracts`
 
 <p align="center">
   <img src="contracts_page.png" width="1100">
 </p>
 
-Its purpose is to quickly and easily visualize the **number of contracts** in the database, considering different **States**, **statal agencies**, and **service providers**, to gain insights into **trends and estimated amounts**, **average tickets**, and to identify **frequently contracted companies**. The analysis covers the period **2018-2025**, based on the available database.
+- Its purpose is to quickly and easily visualize the **number of contracts** in the database, considering different **States**, **statal agencies**, and **service providers**, to gain insights into **trends and estimated amounts**, **average tickets**, and to identify **frequently contracted companies**.
+- The analysis covers the period **2018-2025**, based on the available database.
 
 #### 📊 `Opportunities`
 
@@ -100,8 +101,9 @@ Its purpose is to quickly and easily visualize the **number of contracts** in th
   <img src="opportunities_page.jpg" width="1100">
 </p>
 
-This section analyzes **contract opportunities**, primarily considering **State**, **government agency**, and **expiration dates**. It displays the **updated status of each contract**: expired, active, and urgent (expiring within the next 7 days). Each opportunity includes a **contract description** and an **AI-generated summary**.
-Additionally, **contracting peaks** can be identified through a monthly trend analysis.
+- This section analyzes **contract opportunities**, primarily considering **State**, **government agency**, and **expiration dates**.
+- It displays the **updated status of each contract**: expired, active, and urgent (expiring within the next 7 days). Each opportunity includes a **contract description** and an **AI-generated summary**.
+- Additionally, **contracting peaks** can be identified through a monthly trend analysis.
 
 
 ### 🗃️ DAX Measures
