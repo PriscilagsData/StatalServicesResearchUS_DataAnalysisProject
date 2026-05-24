@@ -89,7 +89,7 @@
 #### 📊 `Contracts`
 
 <p align="center">
-  <img src="contracts_page.png" width="1100">
+  <img src="contracts_page.png" width="1000">
 </p>
 
 - Its purpose is to quickly and easily visualize the **number of contracts** in the database, considering different **States**, **statal agencies**, and **service providers**, to gain insights into **trends and estimated amounts**, **average tickets**, and to identify **frequently contracted companies**.
@@ -98,7 +98,7 @@
 #### 📊 `Opportunities`
 
 <p align="center">
-  <img src="opportunities_page.jpg" width="1100">
+  <img src="opportunities_page.png" width="1000">
 </p>
 
 - This section analyzes **contract opportunities**, primarily considering **State**, **government agency**, and **expiration dates**.
