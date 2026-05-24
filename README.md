@@ -80,7 +80,7 @@
 
 ## 💻 Power BI report
 
-📄 **[Download full Power BI (PDF)](https://github.com/PriscilagsData/StatalServicesResearchUS_DataAnalysisProject/blob/main/public_services_PowerBI.pdf)**
+📄 **[View full Power BI (PDF)](https://github.com/PriscilagsData/StatalServicesResearchUS_DataAnalysisProject/blob/main/public_services_PowerBI.pdf)**
 
 <p align="center">
   <img src="dashboard_pbix.jpg" width="300">
